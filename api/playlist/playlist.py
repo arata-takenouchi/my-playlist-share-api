@@ -8,6 +8,7 @@ async def get_playlists():
 
 @router.post("/playlist")
 async def create_playlist():
+  id = 'ulid'
   pass
 
 @router.put("/playlist")
