@@ -25,3 +25,9 @@ docker-compose run --entrypoint "poetry install --no-root" my-playlist-share-api
 # 下記コマンドで再ビルドする
 docker-compose build --no-cache
 ```
+
+## マイグレーション実行
+```sh
+# コンテナ内で下記コマンドを実行
+poetry run python -m api.migrate_db
+```
