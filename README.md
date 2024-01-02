@@ -1,5 +1,8 @@
 # MyPlaylistShareApi
-データベースはlocalで確認するので、初回起動時にマイグレーションを実行する
+
+* データベースはlocalで確認するので、初回起動時にマイグレーションを実行する
+
+* 構成の参考：https://zenn.dev/sh0nk/books/537bb028709ab9/viewer/f1b6fc
 
 ## 初回起動時
 ```sh
