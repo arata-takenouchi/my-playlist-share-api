@@ -1,6 +1,8 @@
 # MyPlaylistShareApi
-## 構築参考
-https://zenn.dev/sh0nk/books/537bb028709ab9/viewer/f1b6fc
+
+* データベースはlocalで確認するので、初回起動時にマイグレーションを実行する
+
+* 構成の参考：https://zenn.dev/sh0nk/books/537bb028709ab9/viewer/f1b6fc
 
 ## 初回起動時
 ```sh
@@ -26,4 +28,20 @@ docker-compose run --entrypoint "poetry install --no-root" my-playlist-share-api
 ```sh
 # 下記コマンドで再ビルドする
 docker-compose build --no-cache
+```
+
+## マイグレーション実行(テーブル作成)
+```sh
+# コンテナ内で下記コマンドを実行
+poetry run python -m api.migrate_db
+```
+
+##  DB確認コマンド
+```sh
+# DB起動
+docker compose exec db mysql my_playlist_share
+# テーブル確認
+select * from playlist
+# 終了
+\q
 ```
