@@ -1,4 +1,5 @@
 # MyPlaylistShareApi
+データベースはlocalで確認するので、初回起動時にマイグレーションを実行する
 
 ## 初回起動時
 ```sh
@@ -30,4 +31,14 @@ docker-compose build --no-cache
 ```sh
 # コンテナ内で下記コマンドを実行
 poetry run python -m api.migrate_db
+```
+
+##  DB確認コマンド
+```sh
+# DB起動
+docker compose exec db mysql my_playlist_share
+# テーブル確認
+select * from playlist
+# 終了
+\q
 ```
