@@ -19,6 +19,7 @@ currentDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
 currentTime = now.strftime('%H:%M:%S')
 
 async def create_playlist(param: playlist_schema.Create, db: AsyncSession):
+  print(param)
   postData = playlist_model.Playlist(
     **dict(param),
     created = currentDate,
