@@ -12,3 +12,4 @@ class Playlist(Base):
   updated = Column(DateTime, nullable=False)
   created_user_id = Column(String(50), nullable=False)
   updated_user_id = Column(String(50), nullable=False)
+  user_id = Column(String(50), nullable=False)

@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, bindparam
 from sqlalchemy.engine import Result
 from fastapi.security import HTTPAuthorizationCredentials
 from fastapi import HTTPException
@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 import datetime
 import api.schemas.user as user_schema
 import api.models.user as user_model
+import api.schemas.authority as authority_schema
+import api.models.authority as authority_model
 import api.utils.utility as utility
 
 load_dotenv()
@@ -76,3 +78,23 @@ async def authorization(authorization: HTTPAuthorizationCredentials, db: AsyncSe
     raise HTTPException(status_code=401, detail='該当するユーザーが存在しません')
   # 認可が通ればidを返す
   return user_id
+
+# ユーザー権限チェック
+async def check_user_permission(param: authority_schema.GetParams, db: AsyncSession):
+  stmt = select(
+      authority_model.Authority.user_id,
+      authority_model.Authority.function_name,
+      authority_model.Authority.permission,
+    ).where(
+      (authority_model.Authority.user_id == bindparam('user_id'))
+      & (authority_model.Authority.function_name == bindparam('function_name'))
+    )
+  getData: Result = await db.execute(stmt, { 'user_id': param.user_id, 'function_name': param.function_name })
+  await db.close()
+  result = getData.one_or_none()
+  # 権限が存在しなかった場合
+  if (result == None):
+    raise HTTPException(status_code=403, detail='権限が定義されていません。')
+  # 権限が与えられていない場合
+  if (result.permission == False):
+    raise HTTPException(status_code=403, detail='権限が与えられていません。')
