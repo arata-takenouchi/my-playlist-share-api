@@ -5,7 +5,6 @@ import api.utils.utility as utility
 from sqlalchemy.orm import sessionmaker, Session
 from api.db import Base
 
-
 DB_URL = "mysql+pymysql://root@db:3306/my_playlist_share?charset=utf8"
 engine = create_engine(DB_URL, echo=True)
 Session = sessionmaker(

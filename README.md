@@ -20,6 +20,9 @@ docker-compose run \
 
 # パッケージをインストールする(lockファイル=poetry.lockが同時に作成される)
 docker-compose run --entrypoint "poetry install --no-root" my-playlist-share-api
+
+# データベース関連のパッケージを追加
+docker-compose run --entrypoint "poetry add sqlalchemy aiomysql python-ulid bcrypt pyjwt" my-playlist-share-api
 ```
 ## パッケージを追加する時
 * コンテナ内に入って`poetry add xxx`する
