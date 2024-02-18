@@ -23,10 +23,13 @@ userList=[
   user_model.User(id='test_user_id_2', email='test_user_email_2', name='test_user_name_2', password=hash2, created=utility.now, updated=utility.now),
   user_model.User(id='test_user_id_3', email='test_user_email_3', name='test_user_name_3', password=hash3, created=utility.now, updated=utility.now),
 ]
-
 authorityList=[
   authority_model.Authority(id='test_authority_id_1', user_id='test_user_id_1', function_name='playlist.post', permission=1, created=utility.now, updated=utility.now, created_user_id='test_user_id_1', updated_user_id='test_user_id_1'),
-  authority_model.Authority(id='test_authority_id_2', user_id='test_user_id_2', function_name='playlist.post', permission=0, created=utility.now, updated=utility.now, created_user_id='test_user_id_1', updated_user_id='test_user_id_1'),
+  authority_model.Authority(id='test_authority_id_2', user_id='test_user_id_2', function_name='playlist.post', permission=0, created=utility.now, updated=utility.now, created_user_id='test_user_id_2', updated_user_id='test_user_id_2'),
+]
+playlistList=[
+  playlist_model.Playlist(id='01HPXZ81WQW1WQ31WMW8VQZYM5', playlist_name='test_playlist_name_1', playlist_link='test_playlist_link_1', comment='test_playlist_comment_1', created=utility.now, updated=utility.now, created_user_id='test_user_id_1', updated_user_id='test_user_id_1', user_id='test_user_id_1'),
+  playlist_model.Playlist(id='01HPXZ8QH6GGG6RKWRB4JGQ30X', playlist_name='test_playlist_name_2', playlist_link='test_playlist_link_1', comment='test_playlist_comment_2', created=utility.now, updated=utility.now, created_user_id='test_user_id_2', updated_user_id='test_user_id_2', user_id='test_user_id_2'),
 ]
 
 def reset_database():
@@ -37,6 +40,7 @@ def add_database():
   with Session.begin() as session:
     session.add_all(userList)
     session.add_all(authorityList)
+    session.add_all(playlistList)
     session.commit()
     session.close()
 

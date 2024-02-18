@@ -3,7 +3,7 @@ from api.db import Base
 
 class Playlist(Base):
   __tablename__ = "playlist"
-  id = Column(Integer, primary_key=True, autoincrement=True)
+  id = Column(String(50), primary_key=True)
   # playlist_image = Column(Text, nullable=True)
   playlist_name = Column(String(100), nullable=False)
   playlist_link = Column(String(100), nullable=False)
